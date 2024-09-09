@@ -104,6 +104,3 @@
 
 
 
-demian_estres = 10000
-if demian_estres >= 1
-    print ("demian estresadito")
