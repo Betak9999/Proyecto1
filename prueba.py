@@ -1,34 +1,54 @@
-lunes = [5,4,6,7]
-martes = [0,5,6,7]
-miercoles = [3,3,1,9]
-jueves = [10,4,6,7] 
-viernes = [3,1,9,7]
-semana1 = [lunes [0],martes [0],miercoles [0],jueves [0],viernes [0]]
-semana2 = [lunes [1],martes [1],miercoles [1],jueves [1],viernes [1]]
-semana3 = [lunes [2],martes [2],miercoles [2],jueves [2],viernes [2]]
-semana4 = [lunes [3],martes [3],miercoles [3],jueves [3],viernes [3]]
+import ipywidgets as widgets
+from IPython.display import display
+import time
 
-ingreso_semanal = 15
-salida_semanal1 = lunes [0] + martes [0] + miercoles [0] + jueves [0] + viernes [0]
-salida_semanal2 = lunes [1] + martes [1] + miercoles [1] + jueves [1] + viernes [1]
-salida_semanal3 = lunes [2] + martes [2] + miercoles [2] + jueves [2] + viernes [2]
-salida_semanal4 = lunes [3] + martes [3] + miercoles [3] + jueves [3] + viernes [3]
+# Datos de usuario y contraseña
+data_user = "betak9999@gmail.com"
+data_pass = "1234"
+Mensaje1 = "Ingreso exitoso"
+Mensaje2 = "Acceso denegado"
+bloqueo_mensaje = "Debes esperar dado que se bloqueó tu ingreso."
+reintento_mensaje = "Puedes intentar nuevamente."
+user = "Demian"
 
-ingreso_mensual = (ingreso_semanal * 4)
-salida_mensual = (salida_semanal1 + salida_semanal2 + salida_semanal3 + salida_semanal4)
+# Variables de control de intentos
+intentos = 3
 
-if salida_semanal1 > ingreso_semanal:
-    print("Es mayor la salida que el ingreso")
-else:
-    print("No se logra vender mensualmente el ingreso,",ingreso_mensual - salida_mensual, "es la diferencia de productos remanentes")
-    
-if ingreso_mensual - salida_mensual > 0:
-    print(ingreso_mensual - salida_mensual)
-    
-    
-print(salida_mensual)
+# Crear campos de entrada y botón
+input_user = widgets.Text(placeholder='Introduce tu Email:')
+input_pass = widgets.Password(placeholder='Introduce tu contraseña:')
+button = widgets.Button(description="Siguiente")
 
+# Mostrar los widgets
+display(input_user)
+display(input_pass)
+display(button)
 
+# Función de validación
+def validar_credenciales(b):
+    global intentos
+    usuario = input_user.value
+    contrasena = input_pass.value
+
+    if usuario == data_user and contrasena == data_pass:
+        print(Mensaje1)
+        print(f"Bienvenido, {user}")
+        button.disabled = True  # Desactivar el botón
+    else:
+        intentos -= 1
+        print(Mensaje2)
+        if intentos > 0:
+            print(f"Te quedan {intentos} intentos.")
+        else:
+            print(bloqueo_mensaje)
+            for i in range(59, 0, -1):
+                print(f"Reintentando en {i} segundos...", end="\r")
+                time.sleep(1)
+            print(reintento_mensaje)
+            intentos = 3  # Restablecer los intentos
+
+# Asignar la función al botón
+button.on_click(validar_credenciales)
 
 
 
