@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login Prueba 1</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,7 +42,7 @@
         const dataUser = "betak9999@gmail.com";
         const dataPass = "1234";
         let intentos = 3;
-        const mensaje1 = "Ingreso exitoso";
+        const mensaje1 = "Ingreso exitoso.";
         const mensaje2 = "Acceso denegado";
         const bloqueoMensaje = "Debes esperar dado que se bloqueó tu ingreso.";
         const reintentoMensaje = "Puedes intentar nuevamente.";
